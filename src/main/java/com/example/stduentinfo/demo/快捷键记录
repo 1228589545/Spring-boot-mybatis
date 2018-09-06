@@ -1,0 +1,25 @@
+shift+ctrl+a    find action
+shift+ctrl+alt+向上箭头  查找改变的地方
+ctrl+alt+z  撤销(还原)，对任何地方都可以，包括项目
+ctrl + alt +v（提取变量）（c提取静态变量）（f提取成员变量） （p提取方法参数)（m抽取函数）
+ctrl+F8 断点 按F8一行一行运行
+shift+F9调试
+
+resume(重新开始继续)：从一个断点跳到另外一个断点，没有断点就结束运行。对应快捷键(F9)
+查看所有断点 shift+ctrl+F8
+禁止有所有断点（在debug中的mute这个按钮）
+条件断点（shift+ctrl+F8加入条件）
+表达式求值（alt+F8）
+跳转到指定的行（alt+F9）
+setValue 调试过程中动态改变值
+
+ctrl+shift+f9运行类似main函数的可运行的地方
+
+复制当前文件F5
+移动当前文件F6
+批量的复制ctrl+shift+V
+
+ctrl+F12查看代码机构
+查看maven依赖，类图（ctrl+shift+alt+U）
+ctrl+H查看类结构（层次）
+alt+ctrl+H查看方法类结构

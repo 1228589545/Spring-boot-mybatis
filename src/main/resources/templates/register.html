@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>注册页面</title>
+    <style type="text/css">
+        form>div{height:30px;}
+        .self{height:100px;}
+        form label{display: inline-block;width: 80px;}
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js">
+    </script>
+    <!--<script>-->
+        <!--$(function() {-->
+            <!--$("#button1").click(function(){-->
+                <!--alert("注册成功");-->
+            <!--});-->
+        <!--});-->
+    <!--</script>-->
+
+</head>
+<body>
+<h3 style="color:red">填写注册信息</h3>
+<form action="/registering" method="post">
+    <div>
+        <label>账号:</label>
+        <input type="text" name="username" placeholder="可以填写邮箱/手机号">
+    </div>
+    <div>
+        <label>密码:</label>
+        <input type="password" name="password" placeholder = "请输入6-10位密码">
+    </div>
+    <div>
+        <label>确认密码:</label>
+        <input type="password" name="password1" placeholder = "两次密码一致">
+    </div>
+    <div>
+        <label>QQ:</label>
+        <input type="text" name="QQ" placeholder="请输入QQ">
+    </div>
+    <div>
+        <label>性别:</label>
+        <input type="radio" name="sex" value="boy" checked>男(默认)
+        <input type="radio" name="sex" value="girl">女
+    </div>
+    <div>
+        <label>生日:</label>
+        <input type="date" name="birthday" >
+    </div>
+    <div class="self">
+        <label>自我介绍:</label>
+        <textarea rows="5" cols="20" name="myself"></textarea>
+    </div>
+    <div>
+        <button type="submit" id="button1" style="width: 100px">注册</button>
+    </div>
+</form>
+
+</body>
+</html>

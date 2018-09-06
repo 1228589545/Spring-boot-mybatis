@@ -1,0 +1,15 @@
+@RequestParam与@PathVariable的区别
+她们都是将请求（request）里的参数的值绑定到controller里的方法参数里
+第一个使用时：URL:http://localhost:8080/path?参数名=参数值
+第二个使用时：URL:http://localhost:8080/path/参数值
+
+@RequestBody是用来接受前台返回的数据的（json/xml串（数据）），用来读取http请求的body部分数据----就是我们请求的数据（请求报文（一系列内容）到对象）
+（一般放在controlle层的具体请求方法的入参中）
+@ResponseBody是后台获得对象后，将这个对象内容用一定的格式输出到前台（对象到响应报文）
+（放在controller层的方法上,将controller的方法返回对象，通过适当的转换为指定格式后，写入）
+
+@Param mybatis中的注解，是为了给参数命名。
+
+@RequsetMapping（请求到处理器（controller）功能方法的映射规则）
+RequsetMapping是一个用来处理请求地址映射的注解，可用在类或者方法上，用在类上，表示类中
+所有的响应消息都是以该地址父路径

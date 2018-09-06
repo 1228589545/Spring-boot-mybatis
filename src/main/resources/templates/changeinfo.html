@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户信息</title>
+    <style type="text/css">
+        form>div{height:30px;}
+        form label{display: inline-block;width: 80px;}
+        .self{height:100px;}
+    </style>
+</head>
+<body>
+     <h1 style="color:red">请修改您的信息！！！</h1>
+     <!--这个地方因为要获取url中的username必须做成动态的（@{/change(username=${session.username})）thymeleaf是一个神奇的东西-->
+     <form  th:action="@{/change(username=${session.username})}" method="post">
+         <div>
+             <label>性别:</label>
+             <input type="radio" name="sex" value="boy" checked>男
+             <input type="radio" name="sex" value="girl">女
+         </div>
+         <div>
+             <label>QQ:</label>
+            <input type="text" name="QQ" placeholder="请输入QQ">
+         </div>
+         <div>
+             <label>生日:</label>
+             <input type="date" name="birthday">
+         </div>
+         <div class="self">
+             <label>个人介绍:</label>
+             <textarea  rows="5" cols="20" name="myself"></textarea>
+         </div>
+
+         <div>
+             <button type="submit"  id="button1" style="width: 100px;">提交</button>
+         </div>
+         <div>
+             <a href="/person">返回</a>
+         </div>
+
+
+     </form>
+
+
+</body>
+</html>

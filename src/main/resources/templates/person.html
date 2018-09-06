@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${session.username}">个人信息网站</title>
+    <style type="text/css">
+         div{ height: 50px}
+    </style>
+</head>
+<body>
+<h1 style="color: blue">欢迎您:</h1>
+<h3 th:text="${session.username}"></h3>
+<div>
+    <a th:href="@{/personinfo(username=${session.username})}">查看个人详细信息</a>
+</div>
+<div>
+    <a th:href="@{/change(username=${session.username})}">修改个人信息</a>
+</div>
+</body>
+</html>
