@@ -28,6 +28,7 @@ public class StudentController {
     //主页
     @RequestMapping("/")
     public String index(){
+
         return "index";
     }
     //登良界面
