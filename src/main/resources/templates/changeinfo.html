@@ -12,6 +12,9 @@
 <body>
      <h1 style="color:red">请修改您的信息！！！</h1>
      <!--这个地方因为要获取url中的username必须做成动态的（@{/change(username=${session.username})）thymeleaf是一个神奇的东西-->
+     <div>
+         <p th:text="${information}" style="color: red">这里是信息提示.</p>
+     </div>
      <form  th:action="@{/change(username=${session.username})}" method="post">
          <div>
              <label>性别:</label>

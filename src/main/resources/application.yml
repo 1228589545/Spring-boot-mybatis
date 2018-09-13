@@ -4,6 +4,12 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://localhost:3306/test
+#  发送邮件的配置文件
+#  mail:
+#    host: smtp.qq.com
+#    username: 1228589545@qq.com
+#    password: noabandon520yy
+#    default-encoding: utf-8
 server:
   port: 8081
   thymeleaf:
