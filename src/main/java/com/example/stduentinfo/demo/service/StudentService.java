@@ -33,6 +33,10 @@ public class StudentService {
     public void update(String sex,String QQ,String birthday,String myself,String username){
         studentMapper.update( sex, QQ,birthday,myself,username);
     }
+    //注册验证用户名是否重复
+    public   String selectUsername(String username){
+        return studentMapper.selectUsername( username );
+    }
 
 
 }

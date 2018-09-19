@@ -1,5 +1,6 @@
 package com.example.stduentinfo.demo.controller;
 
+import com.example.stduentinfo.demo.entity.RegisterInfoYanzheng;
 import com.example.stduentinfo.demo.entity.Studentinfo;
 import com.example.stduentinfo.demo.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sun.awt.geom.AreaOp;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,12 +25,14 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @Slf4j
 public class StudentController {
+    //验证码宽度，验证码高度
     private static int WIDTH = 60;
     private static int HEIGHT = 20;
     @Autowired
@@ -78,8 +82,12 @@ public class StudentController {
           log.info(checknode2);
           Studentinfo studentinfo = studentService.findByUsernameAndPassword( username,password );
           session.setAttribute( "username",username);
-        if (studentinfo!=null && checknode.equals( checknode2 )){
-
+          if(!checknode.equals( checknode2 )){
+              map.put( "checknode","验证码错误" );
+              return "login";
+          }
+         else if (studentinfo!=null){
+            log.info("IP地址和端口号："+httpServletRequest.getRemoteAddr()+":"+ httpServletRequest.getRemotePort());
             httpServletResponse.setContentType("text/html;charset=utf-8");
             //将信息返回
             PrintWriter out = httpServletResponse.getWriter();
@@ -105,6 +113,7 @@ public class StudentController {
         httpServletRequest.getSession().removeAttribute( "studentinfo" );
         return "login";
     }
+    //加入验证码功能
     @RequestMapping("/checknode")
     public void checkservlet(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws IOException {
 
@@ -127,7 +136,7 @@ public class StudentController {
         g.dispose();
         //将图像输出到客户端
         ByteArrayOutputStream bos = new ByteArrayOutputStream(  );
-        ImageIO .write( image,"JPEG",bos );
+        ImageIO.write( image,"JPEG",bos );
         byte[] buf =bos.toByteArray();
         httpServletResponse.setContentLength( buf.length );
         bos.writeTo( sos );
@@ -167,7 +176,7 @@ public class StudentController {
     //生成一个4字符的验证码
     private char[] generateChechCode() {
         //定义验证码的字符集
-        String chars = "1234557890qwertyuioplkjhgfdsazxcvbnm";
+        String chars = "1234567890qwertyuioplkjhgfdsazxcvbnm";
         char[] rands = new char[4];
         for (int i = 0;i<4 ;i++){
             int rand = (int)(Math.random()*36);
@@ -183,7 +192,8 @@ public class StudentController {
 
     //注册功能
     @RequestMapping("/registering")
-    public String registering( HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse ) throws IOException {
+    public String registering( HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,Map<String,String> map ) throws IOException {
+        httpServletResponse.setContentType("text/html;charset=utf-8");
         String username = httpServletRequest.getParameter( "username" );
         String password = httpServletRequest.getParameter( "password" );
         String password1 =httpServletRequest.getParameter( "password1" );
@@ -191,22 +201,42 @@ public class StudentController {
         String sex = httpServletRequest.getParameter( "sex" );
         String birthday = httpServletRequest.getParameter( "birthday" );
         String myself = httpServletRequest.getParameter( "myself" );
-        if (username!=null&password!=null&password.equals( password1 )){
+        //获取注册验证信息
+        RegisterInfoYanzheng registerInfoYanzheng = new RegisterInfoYanzheng();
+        registerInfoYanzheng.setUsername( username );
+        registerInfoYanzheng.setPassword( password );
+        registerInfoYanzheng.setPassword1( password1 );
+        registerInfoYanzheng.setQQ(QQ);
+        if(username.equals( studentService.selectUsername( username ) ) ){
+            PrintWriter out = httpServletResponse.getWriter();
+            out.print( "<p style='color=red'>用户名已注册</p>" );
+            return "register";
+        }
+         if (!registerInfoYanzheng.panduan()){
+//            httpServletRequest.setAttribute( "registerInfoYanzheng",registerInfoYanzheng );
+            map.put( "Username", registerInfoYanzheng.getErrors().get("username") );
+            map.put( "Password", registerInfoYanzheng.getErrors().get("password") );
+            map.put( "Password1", registerInfoYanzheng.getErrors().get("password1") );
+            map.put( "qq", registerInfoYanzheng.getErrors().get("QQ") );
+            return "register";
+
+        }
+         else{
             studentService.save( username,password,sex,birthday,myself,QQ );
-            httpServletResponse.setContentType("text/html;charset=utf-8");
+
             //将信息返回
             PrintWriter out = httpServletResponse.getWriter();
             out.print( "<script type=\"text/javascript\">alert('注册成功,请您登录！！！')</script>" );
             return "login";
         }
-        else {
-             //解决乱码
-             httpServletResponse.setContentType("text/html;charset=utf-8");
-             PrintWriter out1 = httpServletResponse.getWriter();
-             out1.print( "<script type=\"text/javascript\">alert('注册失败,请检查每一项是否为空，密码是否相同!!!')</script>" );
-//            out1.print ("<p style=\"color:red\">注册失败,请检查每一项是否为空，密码是否相同</p>");
-             return "register";
-        }
+//        else {
+//             //解决乱码
+//             httpServletResponse.setContentType("text/html;charset=utf-8");
+//             PrintWriter out1 = httpServletResponse.getWriter();
+//             out1.print( "<script type=\"text/javascript\">alert('注册失败,请检查每一项是否为空，密码是否相同!!!')</script>" );
+////            out1.print ("<p style=\"color:red\">注册失败,请检查每一项是否为空，密码是否相同</p>");
+//             return "register";
+//        }
 
     }
 //    查看个人信息
@@ -240,10 +270,10 @@ public class StudentController {
         String QQ = request.getParameter( "QQ" );
         String birthday =request.getParameter( "birthday" );
         String myself =request.getParameter( "myself" );
-        studentService.update( sex,QQ,birthday,myself,username);
+
         log.info( username );
         httpServletResponse.setContentType( "text/html;charset=utf-8 ");
-        if(sex!=null&&QQ!=null&&birthday!=null&&myself!=null) {
+        if(sex!=null&&QQ!=null&&birthday!=null&&myself!=null) {                 studentService.update( sex,QQ,birthday,myself,username);
             PrintWriter out=null;
             try {
                 out=httpServletResponse.getWriter();
@@ -253,7 +283,7 @@ public class StudentController {
             out.print( "<script type=\"text/javascript\">alert('修改信息成功！！')</script>" );
             return "person";
         }else {
-            map.put( "information","登陆失败,请检查用户名和密码");
+            map.put( "information","修改的信息内容不能为空");
             return "changeinfo";
         }
     }

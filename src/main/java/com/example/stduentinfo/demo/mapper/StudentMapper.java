@@ -16,6 +16,10 @@ public interface StudentMapper {
     @Select( "select username,password from studentinfo where username=#{username} and password=#{password}" )
     public Studentinfo findByUsernameAndPassword(@Param ( "username" ) String username , @Param( "password" ) String password);
 
+    @Select( "select username from studentinfo where username=#{username}" )
+    public String selectUsername(@Param ( "username" ) String username );
+
+
     @Insert( "insert into studentinfo(username,password,sex,birthday,myself,QQ) values(#{username},#{password},#{sex},#{birthday},#{myself},#{QQ})" )
     public void save( @Param ( "username" ) String username , @Param( "password" ) String password , @Param( "sex" ) String sex, @Param("birthday") String birthday , @Param( "myself" ) String myself, @Param( "QQ" ) String QQ);
 

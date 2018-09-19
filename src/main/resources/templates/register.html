@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>注册页面</title>
@@ -10,13 +10,6 @@
     </style>
     <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js">
     </script>
-    <!--<script>-->
-        <!--$(function() {-->
-            <!--$("#button1").click(function(){-->
-                <!--alert("注册成功");-->
-            <!--});-->
-        <!--});-->
-    <!--</script>-->
 
 </head>
 <body>
@@ -24,19 +17,23 @@
 <form action="/registering" method="post">
     <div>
         <label>账号:</label>
-        <input type="text" name="username" placeholder="可以填写邮箱/手机号">
+        <input type="text" name="username" placeholder="请输入用户名">
+        <span th:text="${Username}"></span>
     </div>
     <div>
         <label>密码:</label>
-        <input type="password" name="password" placeholder = "请输入6-10位密码">
+        <input type="password" name="password" placeholder = "请输入6-12位密码">
+        <span th:text="${Password}"></span>
     </div>
     <div>
         <label>确认密码:</label>
-        <input type="password" name="password1" placeholder = "两次密码一致">
+        <input type="password" name="password1" placeholder = "请保持两次密码一致">
+        <span th:text="${Password1}"></span>
     </div>
     <div>
         <label>QQ:</label>
         <input type="text" name="QQ" placeholder="请输入QQ">
+        <span th:text="${qq}"></span>
     </div>
     <div>
         <label>性别:</label>

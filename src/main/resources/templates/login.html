@@ -44,7 +44,9 @@
         <div>
             <label>验证码:</label>
             <input type="text" name="checknode" placeholder="请输入验证码">
-                  <img src="/checknode">
+                  <img src='/checknode'><a href="/login">看不清,刷新试试
+            <span th:text="${checknode}"></span>
+        </a>
         </div>
         <!-- <div>
             <input id="remember-me" name="remember-me" type="checkbox"/>记住密码
