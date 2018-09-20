@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>个人信息界面</title>
+    <title>查看个人信息界面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div>
-    <h1 style="color: red">用户个人信息</h1>
-</div>
-<div style="font-weight: bold ">
-    <label>用户名:&nbsp;&nbsp;<label th:text="${Username}"></label></label>
-</div>
-<div style="font-weight: bold ">
-    <label>性别:&nbsp;&nbsp;<label th:text="${Sex}"></label></label>
-</div>
-<div style="font-weight: bold ">
-    <label>生日:&nbsp;&nbsp;<label th:text="${Birthday}"></label></label>
-</div>
-<div style="font-weight: bold ">
-    <label>QQ:&nbsp;&nbsp;<label th:text="${QQ}"></label></label>
-</div>
-<div style="font-weight: bold ">
-    <label>自我介绍:&nbsp;&nbsp;<label th:text="${Myself}"></label></label>
-</div>
+<table class="table table-stripe">
+    <caption>个人详细信息</caption>
+    <thead>
+    <th>用户名</th>
+    <th>性别</th>
+    <th>生日</th>
+    <th>QQ</th>
+    <th>自我介绍</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td><label th:text="${Username}"></label></td>
+        <td><label th:text="${Sex}"></td>
+        <td><label th:text="${Birthday}"></td>
+        <td><label th:text="${QQ}"></td>
+        <td><label th:text="${Myself}"></td>
+    </tr>
+    </tbody>
+</table>
 <div>
     <a href="/person">返回</a>
 </div>
+
 </body>
 </html>
 
