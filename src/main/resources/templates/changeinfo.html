@@ -1,49 +1,117 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>修改用户信息</title>-->
+    <!--<style type="text/css">-->
+        <!--form>div{height:30px;}-->
+        <!--form label{display: inline-block;width: 80px;}-->
+        <!--.self{height:100px;}-->
+    <!--</style>-->
+<!--</head>-->
+<!--<body>-->
+     <!--<h1 style="color:red">请修改您的信息！！！</h1>-->
+     <!--&lt;!&ndash;这个地方因为要获取url中的username必须做成动态的（@{/change(username=${session.username})）thymeleaf是一个神奇的东西&ndash;&gt;-->
+     <!--<div>-->
+         <!--<p th:text="${information}" style="color: red">这里是信息提示.</p>-->
+     <!--</div>-->
+     <!--<form  th:action="@{/change(username=${session.username})}" method="post">-->
+         <!--<div>-->
+             <!--<label>性别:</label>-->
+             <!--<input type="radio" name="sex" value="boy" checked>男-->
+             <!--<input type="radio" name="sex" value="girl">女-->
+         <!--</div>-->
+         <!--<div>-->
+             <!--<label>QQ:</label>-->
+            <!--<input type="text" name="QQ" placeholder="请输入QQ">-->
+         <!--</div>-->
+         <!--<div>-->
+             <!--<label>生日:</label>-->
+             <!--<input type="date" name="birthday">-->
+         <!--</div>-->
+         <!--<div class="self">-->
+             <!--<label>个人介绍:</label>-->
+             <!--<textarea  rows="5" cols="20" name="myself"></textarea>-->
+         <!--</div>-->
+
+         <!--<div>-->
+             <!--<button type="submit"  id="button1" style="width: 100px;">提交</button>-->
+         <!--</div>-->
+         <!--<div>-->
+             <!--<a href="/person">返回</a>-->
+         <!--</div>-->
+
+
+     <!--</form>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>修改用户信息</title>
+    <meta charset="utf-8" />
+    <title>bootstrap案例</title>
+    <!--用百度的静态资源库的cdn安装bootstrap环境-->
+    <!-- Bootstrap 核心 CSS 文件 -->
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#back").click(function () {
+                window.location.href="/person";
+            });
+        });
+    </script>
     <style type="text/css">
-        form>div{height:30px;}
-        form label{display: inline-block;width: 80px;}
-        .self{height:100px;}
+        body{background: url("42846c56843811b947609f38bd7fc439.jpg") no-repeat;background-size:cover;font-size: 16px;}
+        .form{background: rgba(255,255,255,0.2);width:400px;margin:100px auto;}
+
     </style>
 </head>
 <body>
-     <h1 style="color:red">请修改您的信息！！！</h1>
-     <!--这个地方因为要获取url中的username必须做成动态的（@{/change(username=${session.username})）thymeleaf是一个神奇的东西-->
-     <div>
-         <p th:text="${information}" style="color: red">这里是信息提示.</p>
-     </div>
-     <form  th:action="@{/change(username=${session.username})}" method="post">
-         <div>
-             <label>性别:</label>
-             <input type="radio" name="sex" value="boy" checked>男
-             <input type="radio" name="sex" value="girl">女
-         </div>
-         <div>
-             <label>QQ:</label>
-            <input type="text" name="QQ" placeholder="请输入QQ">
-         </div>
-         <div>
-             <label>生日:</label>
-             <input type="date" name="birthday">
-         </div>
-         <div class="self">
-             <label>个人介绍:</label>
-             <textarea  rows="5" cols="20" name="myself"></textarea>
-         </div>
 
-         <div>
-             <button type="submit"  id="button1" style="width: 100px;">提交</button>
-         </div>
-         <div>
-             <a href="/person">返回</a>
-         </div>
+<div class="form row">
+    <div>
+        <p th:text="${information}" style="color: red">这里是信息提示.</p>
+    </div>
+    <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form" th:action="@{/change(username=${session.username})}" method="post">
+        <h3 class="form-title"><b>注册你的信息</b></h3>
+        <div class="col-sm-9 col-md-9">
+            <div class="form-group">
+                <label class=" control-label" >确认密码:</label>
+                <input class="form-control required" type="password" placeholder="请保持两次密码一致" name="password2"/>
+            </div>
+            <div class="form-group">
+                <label class=" control-label" >QQ:</label>
+                <input class="form-control required" type="text" placeholder="请输入QQ" name="QQ"/>
+            </div>
+            <div class="form-group">
+                <label class=" control-label">性别:</label>
+                <input type="radio" name="sex" value="boy" checked><b>男(默认)</b>
+                <input type="radio" name="sex" value="girl"><b>女</b>
+            </div>
+            <div class="form-group">
+                <label class=" control-label">生日:</label>
+                <input type="date" name="birthday" >
+            </div>
+            <div class="form-group">
+                <label class=" control-label">自我介绍:</label>
+                <textarea rows="5" cols="25" name="myself"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-info pull-left" id ="back" value="返回"/>
 
+                <input type="submit" class="btn btn-success pull-right" value="提交 "/>
 
-     </form>
-
-
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<script type="text/javascript" src="js/main.js" ></script>
 </body>
 </html>
